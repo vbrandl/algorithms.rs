@@ -1,0 +1,11 @@
+[package]
+name = "pair_with_sum"
+version = "0.1.0"
+authors = ["Valentin Brandl <vbrandl@riseup.net>"]
+
+[dependencies]
+sort = { path = "../sort" }
+
+[lib]
+name = "pair_with_sum"
+path = "src/lib.rs"
