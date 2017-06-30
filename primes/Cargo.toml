@@ -1,0 +1,14 @@
+[package]
+name = "primes"
+version = "0.1.0"
+authors = ["Valentin Brandl <vbrandl@riseup.net>"]
+
+[dependencies]
+
+[lib]
+name = "primes"
+path = "src/lib.rs"
+
+[[bin]]
+name = "primes-bin"
+path = "src/main.rs"
