@@ -52,17 +52,15 @@ where
 /// use pair_with_sum::pair_with_sum_naiv;
 ///
 /// let data = [6,3,5,2,1];
-/// assert!(pair_with_sum_naiv(&data, &11));
-/// assert!(!pair_with_sum_naiv(&data, &12));
+/// assert!(pair_with_sum_naive(&data, &11));
+/// assert!(!pair_with_sum_naive(&data, &12));
 /// ```
-pub fn pair_with_sum_naiv<T>(field: &[T], sum: &<T as Add>::Output) -> bool
+pub fn pair_with_sum_naive<T>(field: &[T], sum: &<T as Add>::Output) -> bool
 where
     T: Add + Copy,
     <T as Add>::Output: PartialOrd,
 {
-    // for i in 0..field.len() - 1 {
     for (i, item) in field.iter().enumerate().take(field.len() - 1) {
-        // for j in i + 1..field.len() {
         for item2 in field.iter().skip(i + 1) {
             if *item + *item2 == *sum {
                 return true;

@@ -3,7 +3,7 @@
 The exercise for this one was to create an algorithm with runtime complexity `O(n log n)` that solves the following
 problem:
 
-Input: `A[] = {a_0, ... a_n-1}, s` where `a_i` and `s` are signed integers and `n` is an unsigned integer (so an array
+Input: `A[] = {a_0, ..., a_n-1}, s` where `a_i` and `s` are signed integers and `n` is an unsigned integer (so an array
 with `n` elements).
 
 Output: `true` if there are two elements `a_i` and `a_j` where `s = a_i + a_j` and `i != j`, else `false`
@@ -53,3 +53,4 @@ while left < right {
 false
 ```
 
+Finding the sum is done in `O(n)` so the complete complexity is `O( (n log n) + n )` which is effectively `O(n log n)`.
