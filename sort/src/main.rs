@@ -1,16 +1,11 @@
+extern crate sort;
 extern crate rand;
 
-mod bubble_sort;
-mod heap_sort;
-mod insertion_sort;
-mod merge_sort;
-mod selection_sort;
-
-use bubble_sort::bubble_sort;
-use heap_sort::heap_sort;
-use insertion_sort::insertion_sort;
-use merge_sort::{merge_sort_bottom_up, merge_sort_top_down};
-use selection_sort::selection_sort;
+use sort::bubble_sort::bubble_sort;
+use sort::heap_sort::heap_sort;
+use sort::insertion_sort::insertion_sort;
+use sort::merge_sort::{merge_sort_bottom_up, merge_sort_top_down};
+use sort::selection_sort::selection_sort;
 
 use rand::Rng;
 

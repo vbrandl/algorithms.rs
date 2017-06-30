@@ -38,6 +38,16 @@ fn top_down_split_merge<T: Copy + PartialOrd>(
 
 /// Sorts a vector using the [mergesort algorithm](https://en.wikipedia.org/wiki/Merge_sort) in a
 /// top down approach. Mergesort has an average case time complexity of `O(n log n)`.
+///
+/// # Examples
+///
+/// ```
+/// use sort::merge_sort::merge_sort_top_down;
+///
+/// let mut data = vec![6,5,4,3,2,1];
+/// merge_sort_top_down(&mut data);
+/// assert_eq!(data, vec![1,2,3,4,5,6]);
+/// ```
 pub fn merge_sort_top_down<T: Copy + PartialOrd>(field: &mut Vec<T>) {
     let mut work: Vec<T> = field.clone();
     top_down_split_merge(&mut work, 0, field.len(), field);
@@ -71,6 +81,16 @@ fn bottom_up_merge<T: Copy + PartialOrd>(
 
 /// Sorts a vector using the [mergesort algorithm](https://en.wikipedia.org/wiki/Merge_sort) in a
 /// bottom up approach. Mergesort has an average case time complexity of `O(n log n)`.
+///
+/// # Examples
+///
+/// ```
+/// use sort::merge_sort::merge_sort_bottom_up;
+///
+/// let mut data = vec![6,5,4,3,2,1];
+/// merge_sort_bottom_up(&mut data);
+/// assert_eq!(data, vec![1,2,3,4,5,6]);
+/// ```
 pub fn merge_sort_bottom_up<T: Copy + PartialOrd>(field: &mut Vec<T>) {
     let mut work: Vec<T> = field.clone();
     let mut width = 1;
@@ -90,18 +110,4 @@ pub fn merge_sort_bottom_up<T: Copy + PartialOrd>(field: &mut Vec<T>) {
         copy_data(&work, field, len);
         width *= 2;
     }
-}
-
-#[test]
-fn test_merge_sort_top_down() {
-    let mut data = vec![0, 2, 5, 1, 6, 4, 9, 3, 8, 7];
-    merge_sort_top_down(&mut data);
-    assert_eq!(data, vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
-}
-
-#[test]
-fn test_merge_sort_bottom_up() {
-    let mut data = vec![0, 2, 5, 1, 6, 4, 9, 3, 8, 7];
-    merge_sort_bottom_up(&mut data);
-    assert_eq!(data, vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 }

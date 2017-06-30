@@ -5,3 +5,11 @@ authors = ["Valentin Brandl <vbrandl@riseup.net>"]
 
 [dependencies]
 rand = "0.3"
+
+[lib]
+name = "sort"
+path = "src/lib.rs"
+
+[[bin]]
+name = "sort-bin"
+path = "src/main.rs"

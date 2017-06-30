@@ -1,8 +1,17 @@
 /// Sorts an array using the [insertionsort
 /// algorithm](https://en.wikipedia.org/wiki/Insertion_sort). Insertionsort has a time complexity
 /// of O(n^2).
+///
+/// # Examples
+///
+/// ```
+/// use sort::insertion_sort::insertion_sort;
+///
+/// let mut data = [4, 7, 2, 1, 5, 3, 6];
+/// insertion_sort(&mut data);
+/// assert_eq!(data, [1, 2, 3, 4, 5, 6, 7]);
+/// ```
 pub fn insertion_sort<T: Copy + PartialOrd>(field: &mut [T]) {
-    // for (idx, item) in field.iter().enumerate().skip(1) {
     for i in 1..field.len() {
         let to_insert = field[i];
         let mut j: usize = i;
@@ -12,11 +21,4 @@ pub fn insertion_sort<T: Copy + PartialOrd>(field: &mut [T]) {
         }
         field[j] = to_insert;
     }
-}
-
-#[test]
-fn test_insertion_sort() {
-    let mut data = [4, 7, 2, 1, 5, 3, 6];
-    insertion_sort(&mut data);
-    assert_eq!(data, [1, 2, 3, 4, 5, 6, 7]);
 }
