@@ -8,13 +8,13 @@ fn top_down_merge<T: Copy + PartialOrd>(
     work: &mut Vec<T>,
 ) {
     let (mut i, mut j) = (start, middle);
-    for k in start..end {
+    for item in work.iter_mut().take(end).skip(start) {
         if i < middle && (j >= end || field[i] <= field[j]) {
-            work[k] = field[i];
-            i = i + 1;
+            *item = field[i];
+            i += 1;
         } else {
-            work[k] = field[j];
-            j = j + 1;
+            *item = field[j];
+            j += 1;
         }
     }
 }
@@ -36,15 +36,17 @@ fn top_down_split_merge<T: Copy + PartialOrd>(
     top_down_merge(work, start, middle, end, field);
 }
 
+/// Sorts a vector using the [mergesort algorithm](https://en.wikipedia.org/wiki/Merge_sort) in a
+/// top down approach. Mergesort has an average case time complexity of `O(n log n)`.
 pub fn merge_sort_top_down<T: Copy + PartialOrd>(field: &mut Vec<T>) {
     let mut work: Vec<T> = field.clone();
     top_down_split_merge(&mut work, 0, field.len(), field);
 
 }
 
-fn copy_data<T: Copy + PartialOrd>(src: &Vec<T>, target: &mut Vec<T>, len: usize) {
-    for i in 0..len {
-        target[i] = src[i];
+fn copy_data<T: Copy + PartialOrd>(src: &[T], target: &mut [T], len: usize) {
+    for (idx, item) in target.iter_mut().take(len).enumerate() {
+        *item = src[idx];
     }
 }
 
@@ -56,17 +58,19 @@ fn bottom_up_merge<T: Copy + PartialOrd>(
     work: &mut Vec<T>,
 ) {
     let (mut i, mut j) = (left, right);
-    for k in left..end {
+    for item in &mut work.iter_mut().take(end).skip(left) {
         if i < right && (j >= end || field[i] <= field[j]) {
-            work[k] = field[i];
-            i = i + 1;
+            *item = field[i];
+            i += 1;
         } else {
-            work[k] = field[j];
-            j = j + 1;
+            *item = field[j];
+            j += 1;
         }
     }
 }
 
+/// Sorts a vector using the [mergesort algorithm](https://en.wikipedia.org/wiki/Merge_sort) in a
+/// bottom up approach. Mergesort has an average case time complexity of `O(n log n)`.
 pub fn merge_sort_bottom_up<T: Copy + PartialOrd>(field: &mut Vec<T>) {
     let mut work: Vec<T> = field.clone();
     let mut width = 1;
@@ -81,9 +85,23 @@ pub fn merge_sort_bottom_up<T: Copy + PartialOrd>(field: &mut Vec<T>) {
                 min(i + 2 * width, len),
                 &mut work,
             );
-            i = i + 2 * width;
+            i += 2 * width;
         }
         copy_data(&work, field, len);
-        width = width * 2;
+        width *= 2;
     }
+}
+
+#[test]
+fn test_merge_sort_top_down() {
+    let mut data = vec![0, 2, 5, 1, 6, 4, 9, 3, 8, 7];
+    merge_sort_top_down(&mut data);
+    assert_eq!(data, vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+}
+
+#[test]
+fn test_merge_sort_bottom_up() {
+    let mut data = vec![0, 2, 5, 1, 6, 4, 9, 3, 8, 7];
+    merge_sort_bottom_up(&mut data);
+    assert_eq!(data, vec![0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 }

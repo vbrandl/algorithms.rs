@@ -1,11 +1,30 @@
+/// Sorts an array using the [selectionsort
+/// algorithm](https://en.wikipedia.org/wiki/Selectionsort). Selectionsort has a time complexity of
+/// `O(n^2)`.
+///
+/// # Examples
+///
+/// ```
+/// let mut data = [6,5,4,3,2,1];
+/// selection_sort(&mut data);
+/// assert_eq!(data, [1,2,3,4,5,6]);
+/// ```
 pub fn selection_sort<T: Copy + PartialOrd>(field: &mut [T]) {
     for left in 0..field.len() {
         let mut min = left;
-        for i in left + 1..field.len() {
-            if field[i] < field[min] {
+        for (i, item) in field.iter().enumerate().skip(left + 1) {
+            if *item < field[min] {
                 min = i;
             }
         }
         field.swap(min, left);
     }
+}
+
+#[test]
+fn test_selection_sort() {
+    let mut data = [6, 5, 4, 3, 2, 1];
+    selection_sort(&mut data);
+    assert_eq!(data, [1, 2, 3, 4, 5, 6]);
+
 }

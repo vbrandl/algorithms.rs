@@ -16,15 +16,15 @@ use rand::Rng;
 
 fn main() {
     let mut rng = rand::thread_rng();
-    let mut field: [i64; 10] = [0; 10];
-    for i in 0..field.len() {
-        field[i] = rng.gen::<i64>();
+    let mut field: [i16; 10] = [0; 10];
+    for x in &mut field {
+        *x = rng.gen::<i16>();
     }
 
     // let mut field = [5, 3, 6, 7, 3, 2, 302];
-    let mut field2 = field.clone();
-    let mut field3 = field.clone();
-    let mut field4 = field.clone().to_vec();
+    let mut field2 = field;
+    let mut field3 = field;
+    let mut field4 = field.to_vec();
     let mut field5 = field4.clone();
     let mut field6 = field4.clone();
     println!("unsorted:             {:?}", field);
